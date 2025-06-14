@@ -1,0 +1,121 @@
+#include <iostream>
+
+class Number
+{
+    double value;
+
+public:
+    Number(double v = 0) : value(v) {}
+
+    void print() const
+    {
+        std::cout << "Value: " << value << std::endl;
+    }
+
+    Number operator-(const Number& other) const
+    {
+        return Number(value - other.value);
+    }
+
+    Number operator*(const Number& other) const
+    {
+        return Number(value * other.value);
+    }
+
+    Number operator/(const Number& other) const
+    {
+        if (other.value == 0)
+        {
+            std::cout << "Error: Division by zero!" << std::endl;
+            return Number(0);
+        }
+        return Number(value / other.value);
+    }
+
+    Number& operator++()
+    {
+        ++value;
+        return *this;
+    }
+
+    Number operator++(int)
+    {
+        Number temp = *this;
+        value++;
+        return temp;
+    }
+
+    Number& operator--()
+    {
+        --value;
+        return *this;
+    }
+
+    Number operator--(int)
+    {
+        Number temp = *this;
+        value--;
+        return temp;
+    }
+
+    bool operator==(const Number& other) const
+    {
+        return value == other.value;
+    }
+
+    bool operator!=(const Number& other) const
+    {
+        return value != other.value;
+    }
+
+    bool operator<=(const Number& other) const
+    {
+        return value <= other.value;
+    }
+
+    bool operator<(const Number& other) const
+    {
+        return value < other.value;
+    }
+
+    bool operator!() const
+    {
+        return value == 0;
+    }
+};
+
+int main()
+{
+    Number a(10), b(5), c;
+
+    c = a - b;
+    c.print();
+
+    c = a * b;
+    c.print();
+
+    c = a / b;
+    c.print();
+
+    ++a;
+    a.print();
+
+    a++;
+    a.print();
+
+    --b;
+    b.print();
+
+    b--;
+    b.print();
+
+    std::cout << std::boolalpha;
+    std::cout << "(a == b): " << (a == b) << std::endl;
+    std::cout << "(a != b): " << (a != b) << std::endl;
+    std::cout << "(a <= b): " << (a <= b) << std::endl;
+    std::cout << "(a < b): " << (a < b) << std::endl;
+    std::cout << "(!Number(0)): " << (!Number(0)) << std::endl;
+    std::cout << "(!Number(10)): " << (!Number(10)) << std::endl;
+
+    return 0;
+}
